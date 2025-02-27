@@ -61,6 +61,8 @@ Acest script generează un director pe baza promptului și creează fișierele n
 6. Certificatele sunt emise pe 2 ani. Daca se doreste prelungirea lor:
 	```sh
 	mkcert -cert-file "%sitename%.pem" -key-file "%sitename%-key.pem" -expire=87600h "%sitename%" "www.%sitename%" "*.%sitename%"
+	```
+	```sh
 	:: Explicația parametrului -expire=87600h:
 	:: 87600h reprezintă 10 ani (10 ani * 365 zile/an * 24 ore/zi = 87600 ore).
 	```
@@ -154,13 +156,14 @@ Acest script generează un director pe baza promptului și creează fișierele n
 	```
 
 ## 10. Structura fișierelor
-	```sh
-	D:\www\local-domain-generator.bat
-	D:\www\mysite.loc\
-		.htaccess
-		index.php
-		vhost.conf
-		\ssl\
-			mysite.loc-key.pem
-			mysite.loc.pem
-	```
+```sh
+D:\www\local-domain-generator.bat
+### Genereaza:
+D:\www\mysite.loc\
+.htaccess
+index.php
+vhost.conf
+\ssl\
+	mysite.loc-key.pem
+	mysite.loc.pem
+```
