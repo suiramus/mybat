@@ -145,14 +145,13 @@ Acest script generează un director pe baza promptului și creează fișierele n
 	Scriptul se va inchide!
 	```
 
-## 10. Structura fisierelor
-	```sh
-	D:\www\local-domain-generator.bat
-	D:\www\mysite.loc
+## 10. Structura fișierelor
+```sh
+D:\www\local-domain-generator.bat
+D:\www\mysite.loc\
 	.htaccess
 	index.php
 	vhost.conf
-	--ssl
-		mysite.loc-keypem
+	\ssl\
+		mysite.loc-key.pem
 		mysite.loc.pem
-	```
