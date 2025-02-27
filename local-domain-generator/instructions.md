@@ -3,6 +3,8 @@
 Acest script generează un director pe baza promptului și creează fișierele necesare pentru vhost, host în Windows, `.htaccess`, `vhost.conf`, `index.php` și certificate SSL (dacă se dorește).
 
 ## 1. Cerințe preliminare
+- XAMPP in Windows
+- Apache > 2.4 (important pentru httpd-vhost.conf si pentru .htaccess)
 - Copiati fisierul .bat in locul unde vreti sa fie generat directorul. mysite.loc/
 - Asigurați-vă că aveți instalat [mkcert](https://github.com/FiloSottile/mkcert) dacă doriți să generați certificate SSL.
 
@@ -155,3 +157,4 @@ D:\www\mysite.loc\
 	\ssl\
 		mysite.loc-key.pem
 		mysite.loc.pem
+```
