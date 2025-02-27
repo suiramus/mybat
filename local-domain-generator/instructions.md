@@ -73,7 +73,7 @@ Acest script generează un director pe baza promptului și creează fișierele n
 1. Fișierul `vhost.conf` va fi creat pentru porturile 80 și 443:
 	```sh
 	# =========================== 
-	# Instructiuni pentru C:\xampp\apache\conf\extra 
+	# Instructiuni pentru C:\xampp\apache\conf\extra\httpd-vhosts.conf
 	# Sitename: mysite.loc 
 	# DocumentRoot: D:\www\mysite.loc 
  

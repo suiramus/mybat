@@ -90,7 +90,7 @@ pause
 
 :: Creează fișierul de configurare pentru portul 80
 echo # =========================== > "%VHOST_FILE%"
-echo # Instructiuni pentru C:\xampp\apache\conf\extra >> "%VHOST_FILE%"
+echo # Instructiuni pentru C:\xampp\apache\conf\extra\httpd-vhosts.conf >> "%VHOST_FILE%"
 echo # Sitename: %sitename% >> "%VHOST_FILE%"
 echo # DocumentRoot: %document_root% >> "%VHOST_FILE%"
 echo. >> "%VHOST_FILE%"
