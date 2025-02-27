@@ -54,10 +54,16 @@ Acest script generează un director pe baza promptului și creează fișierele n
 	Certificatul SSL a fost generat in mysite.loc/ssl/
 	```
 4. Certificatele SSL vor fi adaugate in mysite.loc/ssl/
-	- mysite.loc.pem
-	- mysite.loc-key.pem
+	- `/mysite.loc/ssl/mysite.loc.pem`
+	- `/mysite.loc/ssl/mysite.loc-key.pem`
 	
-5. Certificatele vor fi valabile pentru mysite.loc, www.mysite.loc si *.mysite.loc
+5. Certificatele vor fi valabile pentru `mysite.loc`, `www.mysite.loc` si `*.mysite.loc` 
+6. Certificatele sunt emise pe 2 ani. Daca se doreste prelungirea lor:
+	```sh
+	mkcert -cert-file "%sitename%.pem" -key-file "%sitename%-key.pem" -expire=87600h "%sitename%" "www.%sitename%" "*.%sitename%"
+	:: Explicația parametrului -expire=87600h:
+	:: 87600h reprezintă 10 ani (10 ani * 365 zile/an * 24 ore/zi = 87600 ore).
+	```
 
 
 ## 5. Configurarea vhost
@@ -148,13 +154,13 @@ Acest script generează un director pe baza promptului și creează fișierele n
 	```
 
 ## 10. Structura fișierelor
-```sh
-D:\www\local-domain-generator.bat
-D:\www\mysite.loc\
-	.htaccess
-	index.php
-	vhost.conf
-	\ssl\
-		mysite.loc-key.pem
-		mysite.loc.pem
-```
+	```sh
+	D:\www\local-domain-generator.bat
+	D:\www\mysite.loc\
+		.htaccess
+		index.php
+		vhost.conf
+		\ssl\
+			mysite.loc-key.pem
+			mysite.loc.pem
+	```
