@@ -153,6 +153,6 @@ Acest script generează un director pe baza promptului și creează fișierele n
 	|   vhost.conf
 	|
 	\---ssl
-			mysite.loc-keypem
-			mysite.loc.pem
+		mysite.loc-keypem
+		mysite.loc.pem
 	```
