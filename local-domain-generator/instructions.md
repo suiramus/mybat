@@ -3,7 +3,7 @@
 Acest script generează un director pe baza promptului și creează fișierele necesare pentru vhost, host în Windows, `.htaccess`, `vhost.conf`, `index.php` și certificate SSL (dacă se dorește).
 
 ## 1. Cerințe preliminare
-
+- Copiati fisierul .bat in locul unde vreti sa fie generat directorul. mysite.loc/
 - Asigurați-vă că aveți instalat [mkcert](https://github.com/FiloSottile/mkcert) dacă doriți să generați certificate SSL.
 
 ## 2. Utilizare
@@ -22,7 +22,7 @@ Acest script generează un director pe baza promptului și creează fișierele n
 
 4. Numele domeniului va fi afișat:
 	```sh
-	Numeledomeniului este yourdomain.loc
+	Numele domeniului este mysite.loc
 	```
 
 ## 3. Configurarea variabilelor de cale
@@ -49,48 +49,71 @@ Acest script generează un director pe baza promptului și creează fișierele n
 
 3. Dacă răspunsul este "Y", scriptul va verifica dacă `mkcert` este instalat și va genera certificatele:
 	```sh
-	Certificatul SSL a fost generat in yourdomain.loc/ssl/
+	Certificatul SSL a fost generat in mysite.loc/ssl/
 	```
+4. Certificatele SSL vor fi adaugate in mysite.loc/ssl/
+	- mysite.loc.pem
+	- mysite.loc-key.pem
+	
+5. Certificatele vor fi valabile pentru mysite.loc, www.mysite.loc si *.mysite.loc
+
 
 ## 5. Configurarea vhost
 
 1. Fișierul `vhost.conf` va fi creat pentru porturile 80 și 443:
 	```sh
+	# =========================== 
+	# Instructiuni pentru C:\xampp\apache\conf\extra 
+	# Sitename: mysite.loc 
+	# DocumentRoot: D:\www\mysite.loc 
+ 
 	<VirtualHost *:80>
-		ServerAdmin webmaster@yourdomain.loc
-		ServerName yourdomain.loc
-		ServerAlias www.yourdomain.loc
-		DocumentRoot yourdomain
-		<Directory "yourdomain">
+		ServerAdmin webmaster@mysite.loc
+		ServerName mysite.loc
+		ServerAlias www.mysite.loc
+		DocumentRoot D:\www\mysite.loc
+		<Directory "D:\www\mysite.loc">
 			AllowOverride All
 			Require all granted
 		</Directory>
-		Redirect permanent / https://www.yourdomain.loc/
+		Redirect permanent / https://www.mysite.loc/
 	</VirtualHost>
-
 	<VirtualHost *:443>
-		ServerAdmin webmaster@yourdomain.loc
-		ServerName yourdomain.loc
-		ServerAlias www.yourdomain.loc
-		DocumentRoot yourdomain
-		<Directory "yourdomain">
+		ServerAdmin webmaster@mysite.loc
+		ServerName mysite.loc
+		ServerAlias www.mysite.loc
+		DocumentRoot D:\www\mysite.loc
+		<Directory "D:\www\mysite.loc">
 			AllowOverride All
 			Require all granted
 		</Directory>
 		SSLEngine on
-		SSLCertificateFile yourdomain.loc/ssl/yourdomain.pem
-		SSLCertificateKeyFile yourdomain.loc/ssl/yourdomain-key.pem
+		SSLCertificateFile "D:\www\mysite.loc\ssl\mysite.loc.pem"
+		SSLCertificateKeyFile "D:\www\mysite.loc\ssl\mysite.loc-key.pem"
 	</VirtualHost>
+ 
+	# =========================== 
+
+	# ===========================
+	# C:\Windows\System32\drivers\etc
+	# mysite.loc
+	# 127.0.0.1 mysite.loc
+	# 127.0.0.1 www.mysite.loc
+	# ::1 mysite.loc
+	# ::1 www.mysite.loc
+	# ===========================
 	```
 
 ## 6. Adăugarea intrărilor în fișierul hosts
 
-- Intrările pentru fișierul hosts vor fi adăugate automat:
+- Intrările pentru fișierul hosts vor trebui adăugate in: C:\Windows\System32\drivers\etc\hosts
+- Deschide cu Notepad -> Run as Administrator
 	```sh
-	127.0.0.1 yourdomain.loc
-	127.0.0.1 www.yourdomain.loc
-	::1 yourdomain.loc
-	::1 www.yourdomain.loc
+	# mysite.loc
+	127.0.0.1 mysite.loc
+	127.0.0.1 www.mysite.loc
+	# ::1 mysite.loc
+	# ::1 www.mysite.loc
 	```
 
 ## 7. Crearea fișierului `index.php`
@@ -98,19 +121,21 @@ Acest script generează un director pe baza promptului și creează fișierele n
 - Fișierul `index.php` va fi creat cu următorul conținut:
 	```php
 	<?php
-	echo "yourdomain.loc";
+	echo "mysite.loc";
 	```
 
 ## 8. Generarea fișierului `.htaccess`
 
 1. Scriptul va genera fișierul `.htaccess` cu următorul conținut:
 	```sh
+	# ========== https + www ==========
 	<IfModule mod_rewrite.c>
 		RewriteEngine On
 		RewriteCond %{HTTPS} off [OR]
 		RewriteCond %{HTTP_HOST} !^www\. [NC]
 		RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 	</IfModule>
+	# ========== https + www ==========
 	```
 
 ## 9. Închiderea scriptului
